@@ -1,25 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Provider, useSelector, useDispatch } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import { store } from './app/store';
-import { selectTodos, addTodo } from './todosSlice';
-
+import { selectTodos } from './todosSlice';
+ 
 function App(props) {
-    const dispatch = useDispatch();
-    const todos = useSelector(selectTodos);
-    const [ text, setText ] = useState('');
-
-    const handleChange = (e) => {
-        setText(e.target.value);
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Update the state here
-        dispatch(addTodo(text));
-        setText('');
-    };
-
+    let todos = useSelector(selectTodos);
+ 
     return (
         <div>
             <h1>Todo Application Using Redux</h1>
@@ -27,13 +14,13 @@ function App(props) {
                 <ul>
                     {todos.map((item, index) => <li key={index}>{item}</li>)}
                 </ul>
-                <input value={text} onChange={handleChange} />
-                <button onClick={handleSubmit}>Add</button>
+                <input></input>
+                <button>Add</button>
             </form>
         </div>
     );
 }
-
+ 
 createRoot(document.getElementById('root'))
 .render(
   <React.StrictMode>
